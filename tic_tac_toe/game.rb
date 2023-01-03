@@ -17,4 +17,52 @@ class Board
     @cells[number -1] = symbol
   end
 
+  def valid?(number)
+    cells[number - 1].is_a? Integer
+  end
+
+  def full?
+    cells.all? { |cell| cell.is_a? String }
+  end
+
+  def game_over?
+    WINNING_COMBOS.any? do |combo|
+      cells[combo[0]] == cells[combo[1]] && cells[combo[1]] == cells[combo[2]]
+    end
+  end
 end
+
+
+class Game
+  def initialize
+    @board = Board.new
+    @current_player = "X"
+  end
+
+  def play
+    @board.show
+
+    loop do
+      puts "Player #{@current_player}: Enter a number between 1 and 9 to make your move"
+      number = gets.chomp.to_i
+
+      if @board.valid?(number)
+        @board.update(number, @current_player)
+        @board.show
+        if @board.game_over?
+          puts "Player #{@current_player} wins!"
+          break
+        elsif @board.full?
+          puts "It's a tie!"
+          break
+        end
+        @current_player = @current_player == "X" ? "O" : "X"
+      else
+        puts "Invalid move. Please try again."
+      end
+    end
+  end
+end
+
+game = Game.new
+game.play
