@@ -1,6 +1,5 @@
 require 'csv'
 require 'google/apis/civicinfo_v2'
-require 'erb'
 
 civic_info = Google::Apis::CivicinfoV2::CivicInfoService.new
 civic_info.key = 'AIzaSyClRzDqDh5MsXwnCWi0kOiiBivP6JsSyBw'
