@@ -18,14 +18,14 @@ contents = CSV.open(
   header_converters: :symbol
 )
 
-lines = File.readlines('event_attendees.csv')
-lines.each_with_index do |line, index|
-  next if index.zero?
+# lines = File.readlines('event_attendees.csv')
+# lines.each_with_index do |line, index|
+#   next if index.zero?
 
-  columns = line.split(",")
-  name = columns[2]
-  puts name
-end
+#   columns = line.split(",")
+#   name = columns[2]
+#   puts name
+# end
 
 
 contents.each do |row|
@@ -42,7 +42,7 @@ contents.each do |row|
 
     legislators_names = legislators.map(&:name)
 
-    legislators_string = legislator_names.join(", ")
+    legislators_string = legislators_names.join(", ")
   rescue
     'You can find your representatives by visiting www.commoncause.org/take-action/find-elected-officials'
   end
